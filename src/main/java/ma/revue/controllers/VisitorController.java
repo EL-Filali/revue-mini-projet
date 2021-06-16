@@ -2,6 +2,7 @@ package ma.revue.controllers;
 
 import ma.revue.beans.Auteur;
 import ma.revue.dto.LoginRequestDTO;
+import ma.revue.dto.RegisterRequestDTO;
 import ma.revue.services.VisitorServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.security.auth.login.LoginException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,11 +25,12 @@ public class VisitorController {
     @Autowired
     VisitorServices visitorServices;
     @PostMapping("/register")
-    public ResponseEntity register(@Valid @RequestBody Auteur user  ){
-        return new ResponseEntity(visitorServices.register(user),HttpStatus.OK);
+    public ResponseEntity register( @RequestBody @Valid RegisterRequestDTO registerRequestDTO  ){
+
+        return new ResponseEntity(visitorServices.register(registerRequestDTO),HttpStatus.OK);
     }
     @PostMapping("/login")
-    public ResponseEntity register(@Valid @RequestBody LoginRequestDTO loginRequest){
+    public ResponseEntity login(  @RequestBody @Valid LoginRequestDTO loginRequest){
 
         return new ResponseEntity(visitorServices.connexion(loginRequest),HttpStatus.OK);
     }
@@ -47,26 +50,6 @@ public class VisitorController {
 
     }
 
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public String handleValidationExceptions(UsernameNotFoundException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        return ex.getMessage();
-    }
 
 
     @PostMapping("/initDB")

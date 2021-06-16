@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 
 @Configuration
@@ -27,7 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
     private CustomUserDetailsServices customUserDetailsService;
@@ -56,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -72,16 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
-    /*@Bean
-    public ProviderSignInController providerSignInController() {
-        ConnectionFactoryLocator connectionFactoryLocator =
-                connectionFactoryLocator();
-        UsersConnectionRepository usersConnectionRepository =
-                getUsersConnectionRepository(connectionFactoryLocator);
-        ((InMemoryUsersConnectionRepository) usersConnectionRepository)
-                .setConnectionSignUp(facebookConnectionSignup);
-        return new ProviderSignInController(connectionFactoryLocator,
-                usersConnectionRepository, new FacebookSignInAdapter());
-    }*/
+
 }

@@ -17,4 +17,8 @@ public class ArticleVisitorDTO {
     private List<Auteur> coAuteurs;
     private String resume;
     private List<String> motsclés;
+
+    public ArticleVisitorDTO(Long id) {
+        this.id = id;
+    }
 }

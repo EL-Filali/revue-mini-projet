@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,7 +25,6 @@ public abstract class User implements UserDetails {
     @Id
     @GeneratedValue
     protected Long id;
-
     protected String email;
     protected String password;
     protected boolean enabled;

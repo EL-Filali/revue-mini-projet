@@ -31,8 +31,6 @@ public abstract class  StatusArticle {
   public void refuser(Article article) throws Exception{
     throw new Exception("Operation non permise");
   }
-  public void refuserNeConcernePasLaRevus(Article article) throws Exception{
-    throw new Exception("Operation non permise");
-  }
+
 
 }

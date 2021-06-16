@@ -1,10 +1,11 @@
 package ma.revue.dto;
 
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class LoginRequestDTO {
+
     @NotNull(message = "Non null")
     private String email ;
     @NotNull(message = "Non null")

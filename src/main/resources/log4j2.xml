@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern=" %d{HH:mm:ss.SSS}  [%t]  [%-5level] [E.N.S.A]    %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="MyRollingFile" fileName="./LOGS/Logger.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <pattern> [%logger{36}] Time [%d] [%p] [%C{1.}]  [%t]</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+
+    <Loggers>
+
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+
+        </Root>
+        <logger name="visitor" level="TRACE">
+            <AppenderRef ref="MyRollingFile"/>
+        </logger>
+
+    </Loggers>
+</Configuration>
+

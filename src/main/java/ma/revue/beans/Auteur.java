@@ -22,6 +22,13 @@ public class Auteur extends User{
     public Auteur(Long id, String email, String password, boolean enabled, Profil profil, Role role) {
         super(id, email, password, enabled, profil, role);
     }
+
+    public Auteur(String email, String password, Profil profil) {
+        this.email=email;
+        this.password=password;
+        this.profil=profil;
+    }
+
     @PrePersist
     protected void prePresist(){
         super.role.setRole("AUTEUR");

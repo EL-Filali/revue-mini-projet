@@ -77,15 +77,7 @@ public class ComiteController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    @PutMapping("/articles/{id}/status=REFUSER_ARTICLE_CAR_NE_CONCERNE_PAS")
-    public ResponseEntity refuserArticleCarNeCancernePas(@PathVariable Long id){
-        try{
-            comiteServices.refuserArticleCarNeCancernePas(id);
-            return new ResponseEntity(HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
+
     @DeleteMapping("/users/{id}")
     public ResponseEntity EnableOrDisableUtilisateur(@PathVariable Long id){
         try{
@@ -108,4 +100,5 @@ public class ComiteController {
     public ResponseEntity getArticlesApresReviewing(){
         return new ResponseEntity(comiteServices.getArticlesApresReviewing(),HttpStatus.OK);
     }
+
 }

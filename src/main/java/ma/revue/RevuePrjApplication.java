@@ -14,6 +14,14 @@ public class RevuePrjApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RevuePrjApplication.class, args);
 	}
+
+
+
+
+
+
+
+
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder(){
 		return new BCryptPasswordEncoder();

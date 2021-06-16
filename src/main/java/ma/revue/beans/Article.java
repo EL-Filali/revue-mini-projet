@@ -79,8 +79,10 @@ public class Article {
         status.accepter(this);
     }
 
-    public void refuserCarNeConcernePas() throws Exception {
-        status.refuserNeConcernePasLaRevus(this);
-    }
 
+
+    public Article(Long id, StatusArticle status) {
+        this.id = id;
+        this.status = status;
+    }
 }

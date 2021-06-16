@@ -91,15 +91,7 @@ public class ComiteServices {
             throw new Exception("Aucun article Avec cet id");
     }
 
-    public void refuserArticleCarNeCancernePas(Long id) throws Exception {
-        Optional<Article> articleOptional=articleRepository.findById(id);
-        if(articleOptional.isPresent()){
-            Article article= articleOptional.get();
-            article.refuserCarNeConcernePas();
-            articleRepository.save(article);
-        }else
-            throw new Exception("Aucun article Avec cet id");
-    }
+
 
     public void EnableOrDisableUtilisateur(Long id) throws Exception {
         Optional<User> userOptional=userRepository.findById(id);

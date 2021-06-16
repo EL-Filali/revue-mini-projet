@@ -7,6 +7,7 @@ import ma.revue.config.JwtTokenProvider;
 import ma.revue.dto.ArticleVisitorDTO;
 import ma.revue.dto.LoginRequestDTO;
 import ma.revue.dto.LoginResponseDTO;
+import ma.revue.dto.RegisterRequestDTO;
 import ma.revue.repositories.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -86,7 +87,7 @@ public class VisitorServices {
         return resultDtos;
     }
 
-    public LoginResponseDTO connexion(@Valid  LoginRequestDTO request){
+    public LoginResponseDTO connexion(  LoginRequestDTO request){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -96,7 +97,8 @@ public class VisitorServices {
         return connexionResponse;
     }
 
-    public LoginResponseDTO register(Auteur user){
+    public LoginResponseDTO register(RegisterRequestDTO registerRequestDTO){
+        Auteur user= registerRequestDTO.toAuteur();
         String password=new String(user.getPassword()) ;
         String email=new String(user.getEmail());
 

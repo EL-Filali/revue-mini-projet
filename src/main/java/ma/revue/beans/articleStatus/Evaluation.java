@@ -27,11 +27,8 @@ public class Evaluation extends StatusArticle {
 
     @Override
     public void refuser(Article article) throws Exception {
-        article.setStatus(new Refus());
-    }
-
-    @Override
-    public void refuserNeConcernePasLaRevus(Article article) throws Exception {
         article.setStatus(new RefusCarNeConcernePasLaRevue());
     }
+
+
 }
